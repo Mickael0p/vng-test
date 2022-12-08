@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 
 const sessions = {};
 
-app.get('/session/:room', async (req, res) => {
+app.get('/api/session/:room', async (req, res) => {
   try {
     const { room: roomName } = req.params;
     console.log(sessions);
@@ -40,7 +40,7 @@ app.get('/session/:room', async (req, res) => {
   }
 });
 
-app.post('/archive/start', async (req, res) => {
+app.post('/api/archive/start', async (req, res) => {
   const { session_id } = req.body;
   try {
     const response = await opentok.initiateArchiving(session_id);
@@ -54,7 +54,7 @@ app.post('/archive/start', async (req, res) => {
   }
 });
 
-app.get('/archive/stop/:archiveId', async (req, res) => {
+app.get('/api/archive/stop/:archiveId', async (req, res) => {
   const { archiveId } = req.params;
   try {
     const response = await opentok.stopArchiving(archiveId);
@@ -68,7 +68,7 @@ app.get('/archive/stop/:archiveId', async (req, res) => {
   }
 });
 
-app.get('/archive/:sessionId', async (req, res) => {
+app.get('/api/archive/:sessionId', async (req, res) => {
   try {
     const { sessionId } = req.params;
     const archives = await opentok.listArchives(sessionId);
